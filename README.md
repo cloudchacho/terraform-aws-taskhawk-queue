@@ -11,7 +11,7 @@ Usage
 -----
 ```hcl
 module "taskhawk-dev-myapp" {
-  source   = "automatic/taskhawk-queue/aws"
+  source   = "Automatic/taskhawk-queue/aws"
   queue    = "DEV-MYAPP"
   iam      = true
   alerting = true
