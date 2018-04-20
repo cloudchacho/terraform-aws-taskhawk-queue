@@ -35,4 +35,4 @@ The SQS queue name will be prefixed by `TASKHAWK-`.
 
 ## How to publish
 
-TODO fill in once Terraform.io public registry bits are figured out.
+Go to [Terraform Registry](https://registry.terraform.io/modules/Automatic/taskhawk-queue/aws), and Resync module.
