@@ -8,6 +8,7 @@ variable "max_receive_count" {
 
 variable "tags" {
   description = "Tags to attach to the SQS queues"
+  type        = "map"
 }
 
 variable "alerting" {
