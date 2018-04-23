@@ -43,21 +43,25 @@ variable "queue_alarm_bulk_high_message_count_threshold" {
 }
 
 variable "queue_alarm_high_message_count_actions" {
-  description = "Cloudwatch Action ARNs for main queue Alarm for high message count"
+  description = "Cloudwatch Action ARNs for main queue Alarm for high message count (required if alerting is on)"
   type        = "list"
+  default     = []
 }
 
 variable "queue_ok_high_message_count_actions" {
-  description = "Cloudwatch Action ARNs for main queue OK for high message count"
+  description = "Cloudwatch Action ARNs for main queue OK for high message count (required if alerting is on)"
   type        = "list"
+  default     = []
 }
 
 variable "dlq_alarm_high_message_count_actions" {
-  description = "Cloudwatch Action ARNs for dead-letter queue Alarm for high message count"
+  description = "Cloudwatch Action ARNs for dead-letter queue Alarm for high message count (required if alerting is on)"
   type        = "list"
+  default     = []
 }
 
 variable "dlq_ok_high_message_count_actions" {
-  description = "Cloudwatch Action ARNs for dead-letter queue OK for high message count"
+  description = "Cloudwatch Action ARNs for dead-letter queue OK for high message count (required if alerting is on)"
   type        = "list"
+  default     = []
 }
