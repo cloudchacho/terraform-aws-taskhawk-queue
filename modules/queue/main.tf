@@ -36,7 +36,7 @@ resource "aws_cloudwatch_metric_alarm" "high_message_alert" {
   treat_missing_data  = "ignore"
 
   dimensions {
-    QueueName = "${var.queue}"
+    QueueName = "TASKHAWK-${var.queue}"
   }
 
   alarm_description = "Alert if Taskhawk SQS queue too high"
@@ -59,7 +59,7 @@ resource "aws_cloudwatch_metric_alarm" "dlq_alert" {
   treat_missing_data = "ignore"
 
   dimensions {
-    QueueName = "${var.queue}-DLQ"
+    QueueName = "TASKHAWK-${var.queue}-DLQ"
   }
 
   alarm_description = "Alert if Taskhawk DLQ is non-empty"
