@@ -16,6 +16,10 @@ module "taskhawk-dev-myapp" {
   iam      = true
   alerting = true
 
+  enable_scheduler   = true
+  aws_region         = "us-east-1"
+  aws_account_id     = "12345678"
+
   tags = {
     app     = "myapp"
     env     = "dev"
