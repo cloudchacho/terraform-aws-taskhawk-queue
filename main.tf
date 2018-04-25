@@ -92,6 +92,8 @@ resource "aws_iam_policy" "policy" {
 
 data "aws_iam_policy_document" "scheduler_policy_document" {
   "statement" {
+    sid = "AllowCloudwatchRule"
+
     actions = [
       "sqs:SendMessage",
     ]
@@ -105,7 +107,7 @@ data "aws_iam_policy_document" "scheduler_policy_document" {
         "events.amazonaws.com",
       ]
 
-      type = "AWS"
+      type = "Service"
     }
 
     condition {
@@ -121,10 +123,9 @@ data "aws_iam_policy_document" "scheduler_policy_document" {
   }
 }
 
-resource "aws_iam_policy" "scheduler_policy" {
-  count = "${var.iam == "true" && var.enable_scheduler == "true" ? 1 : 0}"
+resource "aws_sqs_queue_policy" "default_queue_policy" {
+  count = "${var.iam && var.enable_scheduler ? 1 : 0}"
 
-  name        = "taskhawk-scheduler-${var.queue}"
-  description = "Taskhawk Scheduler policy for ${var.queue}"
-  policy      = "${data.aws_iam_policy_document.scheduler_policy_document.json}"
+  policy    = "${data.aws_iam_policy_document.scheduler_policy_document.json}"
+  queue_url = "${module.queue_default.sqs_queue_url}"
 }
