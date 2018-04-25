@@ -121,7 +121,7 @@ data "aws_iam_policy_document" "scheduler_policy_document" {
   }
 }
 
-resource "aws_iam_policy" "policy" {
+resource "aws_iam_policy" "scheduler_policy" {
   count = "${var.iam == "true" && var.enable_scheduler == "true" ? 1 : 0}"
 
   name        = "taskhawk-scheduler-${var.queue}"
