@@ -89,3 +89,42 @@ resource "aws_iam_policy" "policy" {
 
   policy = "${data.aws_iam_policy_document.policy_document.json}"
 }
+
+data "aws_iam_policy_document" "scheduler_policy_document" {
+  "statement" {
+    actions = [
+      "sqs:SendMessage",
+    ]
+
+    resources = [
+      "${module.queue_default.sqs_queue_arn}",
+    ]
+
+    principals {
+      identifiers = [
+        "events.amazonaws.com",
+      ]
+
+      type = "AWS"
+    }
+
+    condition {
+      test = "ArnEquals"
+
+      # use lower case by default since tf-generator would change case when creating rule name
+      values = [
+        "arn:aws:events:${var.aws_region}:${var.aws_account_id}:rule/taskhawk-${lower(var.queue)}-*",
+      ]
+
+      variable = "aws:SourceArn"
+    }
+  }
+}
+
+resource "aws_iam_policy" "policy" {
+  count = "${var.iam == "true" && var.enable_scheduler == "true" ? 1 : 0}"
+
+  name        = "taskhawk-scheduler-${var.queue}"
+  description = "Taskhawk Scheduler policy for ${var.queue}"
+  policy      = "${data.aws_iam_policy_document.scheduler_policy_document.json}"
+}

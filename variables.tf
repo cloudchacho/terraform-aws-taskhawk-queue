@@ -7,6 +7,21 @@ variable "iam" {
   default     = false
 }
 
+variable "enable_scheduler" {
+  description = "Should Taskhawk scheduler be enabled?"
+  default     = false
+}
+
+variable "aws_region" {
+  description = "AWS Region (required if enable_scheduler is true)"
+  default     = ""
+}
+
+variable "aws_account_id" {
+  description = "AWS Account ID (required if enable_scheduler is true)"
+  default     = ""
+}
+
 variable "max_receive_count" {
   description = "Maximum number of receives allowed before message is moved to the dead-letter-queue"
   default     = 4
