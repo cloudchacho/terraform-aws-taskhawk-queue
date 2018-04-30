@@ -49,7 +49,7 @@ module "queue_low_priority" {
 module "queue_bulk" {
   source = "./modules/queue"
 
-  queue = "${var.queue}-LOW-PRIORITY"
+  queue = "${var.queue}-BULK"
 
   max_receive_count = "${var.max_receive_count}"
   alerting          = "${var.alerting}"
